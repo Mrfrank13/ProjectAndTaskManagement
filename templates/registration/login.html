@@ -1,0 +1,61 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div id="login">
+    <h3 class="text-center text-white pt-5">Login form</h3>
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                    <form id="login-form" class="form" action="" method="post">
+                        {% csrf_token %}
+                        <h3 class="text-center text-info">Login</h3>
+
+                        {% for error in form.non_field_errors %}
+                        <div class="form-group {% if form.non_field_errors %} has-error {% endif %}">{{ error }}</div>
+                        {% endfor %}
+                        <div class="form-group">
+                            <label for="username" class="text-info">Username:</label><br>
+
+                            {{ form.username }}
+                            {% for error in form.username.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Password:</label><br>
+
+                            {{ form.password}}
+                            {% for error in form.password.errors %}
+                            {{ error }}
+                            {% endfor %}
+                            <a href="/accounts/sign_up/"><small class="text-info" style="float: right;">
+                                New user? Register now.
+                            </small></a>
+                        </div>
+                      
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                        </div>
+                       
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+      $("#id_username").attr('placeholder', 'Enter valid username').attr('class', 'form-control');
+      $("#id_password").attr('placeholder', 'Enter valid password').attr('class', 'form-control');
+      
+    });
+ 
+  </script>
+  
+{% endblock content %}

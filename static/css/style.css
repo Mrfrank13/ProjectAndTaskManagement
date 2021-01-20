@@ -1,0 +1,82 @@
+body {
+  padding-top: 100px;
+  background-color: #e9ecef;
+}
+
+#login .container #login-row #login-column #login-box {
+  max-width: 600px;
+  margin-top: -100px;
+  border: 1px solid #9C9C9C;
+  background-color: #212529;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+
+.text-info {
+  color: #27c24b!important;
+}
+
+.btn-info {
+  color: #f8f9fa;
+  background-color: #27a431;
+  border-color: #27a431;
+}
+
+.navbar-dark .navbar-brand {
+  color: #2eff3f;
+}
+.btn-info:hover {
+  color: #fff;
+  background-color: #1d2124;
+  border-color: #1d2124;
+}
+.card-title {
+  color: #2eff3f !important;
+}
+
+.card {
+  
+  background-color: #212529;
+  
+}
+.card h5, .card h4,.card p, .card h6{
+  color: white;
+}
+
+h2{
+  color: #1e7e34;
+
+}
+
+.btn-warning {
+  color: #f8f9fa;
+  background-color: #27a431;
+  border-color: #27a431;
+}
+
+.btn-warning:hover {
+  color: #1d2124;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+
+.btn-primary {
+  color: #f8f9fa;
+  background-color: #27a431;
+  border-color: #27a431;
+}
+
+.btn-primary:hover {
+  color: #1d2124;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.card-header{
+  color:#27a431
+}

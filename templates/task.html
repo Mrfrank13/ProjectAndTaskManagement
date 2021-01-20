@@ -1,0 +1,227 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block content %}
+
+<div class="modal fade" id="addAssignmentModal" tabindex="-1" role="dialog" aria-labelledby="addAssignmentLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addAssignmentLabel">Edit Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form  method="post" action="/project/{{project_id}}/task/{{task.id}}" enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="modal-body">
+         
+          <div class="form-group">
+            <label for="taskdescription">Submission Description *</label>
+            <textarea type="text" class="form-control" id="assignmentdescription" required  name="assignmentdescription" placeholder="Enter the Description"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="taskstartdate">Submission File *</label>
+            <input type="file" class="form-control" id="submissionfile" required name="submissionfile" placeholder="Submit your Assignment">
+          </div>
+          
+         
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editAssignmentModal" tabindex="-1" role="dialog" aria-labelledby="editAssignmentLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editAssignmentLabel">Edit Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form  method="post" action="/project/{{project_id}}/task/{{task.id}}" enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="modal-body">
+         
+          <div class="form-group">
+            <label for="taskdescription">Submission Description *</label>
+            <textarea type="text" class="form-control" id="assignmentdescription"  name="assignmentdescription" placeholder="Enter the Description">{{task.assignmentDescription}}</textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="taskstartdate">Submission File *</label>
+            <input type="file" class="form-control" id="submissionfile" name="submissionfile" placeholder="Submit your Assignment">
+          </div>
+          
+         
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>
+
+  {% if user == project.owner or request.user.is_superuser or request.user.is_staff %}
+
+  <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="editTaskLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editTaskLabel">Edit Task</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form  method="post" action="/project/{{project_id}}/task/{{task.id}}" enctype="multipart/form-data">
+          {% csrf_token %}
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="taskname">Task Name *</label>
+              <input type="text" class="form-control" id="taskname" required value={{task.name}} name="taskname" placeholder="Enter Task Name">
+            </div>
+            <div class="form-group">
+              <label for="taskdescription">Task Description *</label>
+              <textarea type="text" class="form-control" id="taskdescription" required  name="taskdescription" placeholder="Enter the Description">{{task.description}}</textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="taskstartdate">Task Start Date *</label>
+              <input type="date" class="form-control" id="taskstartdate" required name="taskstartdate" value={{task.startdate}} placeholder="Enter the Start Date of the Task">
+            </div>
+            <div class="form-group">
+              <label for="taskenddate">Task End Date *</label>
+              <input type="date" class="form-control" id="taskenddate" required name="taskenddate" value={{task.enddate}} placeholder="Enter the End Date of the Task">
+            </div>
+           
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="AssigneeModal" tabindex="-1" role="dialog" aria-labelledby="AssigneeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="AssigneeModalLabel">Assign Task</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form  method="post" action="/project/{{project_id}}/task/{{task.id}}" enctype="multipart/form-data">
+          {% csrf_token %}
+        <div class="modal-body">
+          <label for="taskassignee"> Assign a New Person for this task</label>
+          <select name="taskassignee" id="taskassignee">
+           {% for each in user %}
+           <option value="{{each.username}}">{{each.username}}</option>
+           {% endfor %}
+           
+            </select>
+           
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Assign</button>
+        </div>
+      </form>
+
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      
+      <!-- /.col-lg-3 -->
+
+      <div class="col-lg-12">
+        
+       
+
+        <div class="row">
+          <div class="col-md-12"> 
+            <div class="desc-title h-100">
+                <h1>{{task.project}}</h1>
+                <h2>{{task.name}} 
+                  {% if user == project.owner or request.user.is_superuser %}
+                  <button data-toggle="modal" data-target="#editTaskModal"  class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true">  </i>&nbsp;Edit</button>
+                  {% endif %}
+                </h2>
+                <h4>From {{task.startdate}} To {{task.enddate}}</h4>
+                {% if task.assignee != None  %}
+                <h5>Task Assigned To <span style="color:blue">{{task.assignee}}</span></h5>
+                {% endif %}
+                {% if user == project.owner or request.user.is_staff or request.user.is_superuser %}
+                <button class="btn btn-success" data-toggle="modal" data-target="#AssigneeModal">{% if task.assignee == None %}Chose Assignee{% else %}Change Assignee {% endif %}</button>
+                {% endif %}  
+
+               
+                
+                 </select>
+                
+            </div>
+           </div>
+         
+           
+            <div class="col-md-12"> 
+              <div class="desc-title h-100">
+                 
+                  <p>{{task.description|linebreaks }}</p>
+                 
+                  
+              </div>
+             </div>
+             <div class="card">
+              <div class="card-header">
+                Submission Details
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Descrption</h5>
+                {% if task.assignmentDescription == None and task.assignmentFile == None %}
+                <button data-toggle="modal" data-target="#addAssignmentModal"  class="btn btn-info"><i class="fa fa-plus" aria-hidden="true">  </i>&nbsp; Add Submission
+              
+                {% else %}
+                  <p class="card-text">{{task.assignmentDescription}}</p>
+                  <a href="/{{task.assignmentFile}}" download class="btn btn-primary">Download Assignment</a>
+                  <button data-toggle="modal" data-target="#editAssignmentModal"  class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true">  </i>&nbsp; Edit Submission
+  
+                {% endif %}
+              </div>
+            </div>
+             
+             
+          
+         
+          
+        </div>
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  {% endblock content %}
